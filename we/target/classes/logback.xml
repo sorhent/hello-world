@@ -1,0 +1,30 @@
+<configuration>
+
+	<!-- <turboFilter class="org.home.we.MyMarker"> -->
+	<!-- <Marker>sample</Marker> -->
+	<!-- </turboFilter> -->
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<evaluator class="org.home.we.MyMarker">
+			<marker>NOTIFY_ADMIN</marker>
+			<!-- you specify add as many markers as you want -->
+			<marker>TRANSACTION_FAILURE</marker>
+		</evaluator>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+				C:%X{client} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+
+	<logger name="org.home" level="debug" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="OFF">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
